@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security Translated — Cyber for the people who build it and the people who fund it</title>
+<script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
+<style>
+/* ── Brand tokens (brand-tokens-blue-gold.css) ── */
+:root {
+  --bg-deep: #0B1829; --bg-surface: #122035; --bg-raised: #1A2E4A;
+  --bg-gold: #1A1608; --bg-blue: #0D1F38;
+  --border: #1B3A5C; --border-gold: #C9A227; --border-blue: #2A5080;
+  --text-primary: #EEF4FF; --text-body: #C5D0E8; --text-muted: #6B84AA; --text-dim: #4A6080;
+  --gold: #C9A227; --gold-light: #E2C14A; --gold-soft: #F0D97A;
+  --blue: #3B7DD8; --blue-light: #5E99E8; --blue-soft: #8BADD4;
+  --radius-sm: 6px; --radius-md: 10px; --radius-lg: 14px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg-deep); color: var(--text-body); line-height: 1.5; }
+a { color: var(--gold-light); text-decoration: none; }
+a:hover { color: var(--gold-soft); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+/* ── Nav ── */
+header { position: sticky; top: 0; z-index: 50; background: rgba(11,24,41,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+.nav { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.brand { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.brand-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+.brand-name { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+nav.links { display: flex; gap: 4px; flex-wrap: wrap; }
+nav.links a { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: var(--text-muted); padding: 7px 11px; border-radius: var(--radius-sm); }
+nav.links a:hover { color: var(--text-primary); background: var(--bg-raised); }
+nav.links a.active { color: var(--gold-light); background: var(--bg-gold); border: 1px solid var(--border-gold); padding: 6px 10px; }
+
+/* ── Page switching ── */
+.page { display: none; padding: 3rem 0 4rem; animation: fadein .25s ease; }
+.page.visible { display: block; }
+@keyframes fadein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ── Shared type ── */
+.eyebrow { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 12px; }
+h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 600; color: var(--text-primary); line-height: 1.15; letter-spacing: -0.01em; }
+h1 .gold { color: var(--gold-light); }
+h2 { font-size: 22px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
+.tagline { font-size: 16px; color: var(--text-muted); margin-top: 14px; max-width: 560px; }
+.section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin: 2.5rem 0 14px; display: flex; align-items: center; gap: 10px; }
+.section-label::before { content: '—'; color: var(--gold); }
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.sub { font-size: 13px; color: var(--text-muted); max-width: 620px; margin-bottom: 18px; }
+
+/* ── Hero translation signature ── */
+.hero { padding: 4rem 0 3rem; }
+.translate-demo { margin-top: 2.2rem; display: grid; grid-template-columns: 1fr 28px 1fr; gap: 12px; align-items: stretch; max-width: 780px; }
+.t-before, .t-after { border-radius: var(--radius-sm); padding: 14px 16px; font-size: 13px; line-height: 1.45; min-height: 88px; }
+.t-before { background: #0F1B2E; border: 1px solid var(--border); color: var(--text-muted); }
+.t-after { background: var(--bg-gold); border: 1px solid var(--border-gold); color: var(--gold-soft); }
+.t-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.t-before .t-label { color: #ef4444; }
+.t-after .t-label { color: var(--gold); }
+.t-arrow { display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 18px; }
+.t-fade { transition: opacity .35s ease; }
+
+.cta-row { display: flex; gap: 12px; margin-top: 2.2rem; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; padding: 10px 18px; border-radius: var(--radius-sm); border: 1px solid var(--border-gold); color: var(--gold-light); cursor: pointer; background: transparent; font-family: var(--font); }
+.btn:hover { background: rgba(201,162,39,0.12); color: var(--gold-soft); }
+.btn.solid { background: var(--gold); color: #0B1829; }
+.btn.solid:hover { background: var(--gold-light); color: #0B1829; }
+.btn.quiet { border-color: var(--border-blue); color: var(--blue-light); }
+.btn.quiet:hover { background: rgba(59,125,216,0.1); color: var(--blue-light); }
+
+/* ── Cards / grids ── */
+.grid { display: grid; gap: 12px; }
+.g3 { grid-template-columns: repeat(3, 1fr); }
+.g2 { grid-template-columns: repeat(2, 1fr); }
+.card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px 16px; display: block; }
+a.card:hover { border-color: var(--border-blue); background: var(--bg-raised); }
+.card .num { font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: 0.08em; margin-bottom: 8px; }
+.card h3 { font-size: 14px; font-weight: 600; color: var(--text-body); line-height: 1.35; margin-bottom: 5px; }
+.card p { font-size: 12px; color: var(--text-muted); line-height: 1.45; }
+.card.domain { background: var(--bg-blue); border-color: var(--border-blue); }
+.card.domain .num { color: var(--blue-light); }
+.pill { display: inline-block; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 20px; margin-top: 10px; }
+.pill.free { background: rgba(59,125,216,0.15); color: var(--blue-light); border: 1px solid var(--border-blue); }
+.pill.paid { background: rgba(201,162,39,0.15); color: var(--gold-light); border: 1px solid var(--border-gold); }
+.pill.soon { background: var(--bg-raised); color: var(--text-dim); border: 1px solid var(--border); }
+
+/* ── Funnels ── */
+.funnel { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; }
+.funnel h3 { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.funnel .pillar-tag { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 14px; }
+.funnel-steps { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr; gap: 8px; align-items: stretch; }
+.fstep { border-radius: var(--radius-sm); padding: 12px; font-size: 12px; line-height: 1.4; }
+.fstep .fs-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
+.fstep strong { display: block; font-size: 12.5px; margin-bottom: 3px; }
+.fstep.free { background: var(--bg-blue); border: 1px solid var(--border-blue); color: var(--blue-soft); }
+.fstep.free .fs-label { color: var(--blue-light); }
+.fstep.free strong { color: var(--blue-light); }
+.fstep.news { background: var(--bg-raised); border: 1px solid var(--border); color: var(--text-muted); }
+.fstep.news .fs-label { color: var(--text-dim); }
+.fstep.news strong { color: var(--text-body); }
+.fstep.paid { background: var(--bg-gold); border: 1px solid var(--border-gold); color: var(--gold); }
+.fstep.paid .fs-label { color: var(--gold); }
+.fstep.paid strong { color: var(--gold-light); }
+.fstep.pending { background: var(--bg-surface); border: 1px dashed var(--border); color: var(--text-dim); }
+.fstep.pending .fs-label { color: var(--text-dim); }
+.fstep.pending strong { color: var(--text-muted); }
+.farrow { display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 15px; }
+.funnel + .funnel { margin-top: 14px; }
+.fstep a { font-size: 11px; font-weight: 600; }
+
+/* ── Articles ── */
+.article-list { display: flex; flex-direction: column; gap: 10px; }
+.article { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px 18px; display: block; }
+.article:hover { border-color: var(--border-gold); }
+.article .a-date { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 5px; }
+.article h3 { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.article p { font-size: 12.5px; color: var(--text-muted); }
+.feed-state { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px 18px; font-size: 13px; color: var(--text-muted); }
+
+/* ── Callout ── */
+.callout { background: var(--bg-gold); border: 1px solid var(--border-gold); border-radius: var(--radius-md); padding: 18px 20px; margin-top: 2rem; }
+.callout .c-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.callout h3 { font-size: 15px; font-weight: 600; color: var(--gold-light); margin-bottom: 5px; }
+.callout p { font-size: 12.5px; color: var(--gold); opacity: .9; margin-bottom: 12px; }
+
+/* ── Catalog rows (all pillars + domains) ── */
+.cat-head, .cat-row { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 10px; align-items: center; }
+.cat-head { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); padding: 0 14px 8px; }
+.cat-row { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 8px; }
+.cat-row .c-name { font-size: 13px; font-weight: 600; color: var(--text-body); line-height: 1.3; }
+.cat-row .c-name small { display: block; font-weight: 400; font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+.cat-cell { font-size: 12px; line-height: 1.4; color: var(--text-muted); }
+.cat-cell strong { display: block; font-size: 12px; color: var(--text-body); }
+.cat-cell.gold strong { color: var(--gold-light); }
+.cat-cell a { font-size: 11px; font-weight: 600; }
+.mini-pill { display: inline-block; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; padding: 2px 7px; border-radius: 20px; margin-top: 4px; }
+.mini-pill.live { background: rgba(201,162,39,0.15); color: var(--gold-light); border: 1px solid var(--border-gold); }
+.mini-pill.soon { background: var(--bg-raised); color: var(--text-dim); border: 1px solid var(--border); }
+.mini-pill.freeform { background: rgba(59,125,216,0.15); color: var(--blue-light); border: 1px solid var(--border-blue); }
+
+/* ── Portfolio ── */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 1.6rem 0; }
+.stat { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; text-align: center; }
+.stat .n { font-size: 26px; font-weight: 600; color: var(--gold-light); }
+.stat .l { font-size: 11px; color: var(--text-muted); line-height: 1.35; margin-top: 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.chip { font-size: 11px; color: var(--blue-soft); background: var(--bg-blue); border: 1px solid var(--border-blue); border-radius: 20px; padding: 3px 10px; }
+.chip.cert { color: var(--gold-light); background: var(--bg-gold); border-color: var(--border-gold); font-weight: 600; }
+.timeline { border-left: 1px solid var(--border); margin-left: 6px; padding-left: 20px; display: flex; flex-direction: column; gap: 18px; }
+.t-item { position: relative; }
+.t-item::before { content: ''; position: absolute; left: -25px; top: 5px; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); }
+.t-item .t-when { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); }
+.t-item h3 { font-size: 14px; font-weight: 600; color: var(--text-primary); margin: 3px 0 2px; }
+.t-item .t-org { font-size: 12px; color: var(--gold); margin-bottom: 4px; }
+.t-item p { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; max-width: 640px; }
+
+@media (max-width: 720px) {
+  .cat-head { display: none; }
+  .cat-row { grid-template-columns: 1fr; gap: 8px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Footer ── */
+footer { border-top: 1px solid var(--border); padding: 1.6rem 0 2.4rem; margin-top: 2rem; }
+footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+footer .fine { font-size: 11px; color: var(--text-dim); }
+
+@media (max-width: 720px) {
+  .g3, .g2 { grid-template-columns: 1fr; }
+  .translate-demo, .funnel-steps { grid-template-columns: 1fr; }
+  .t-arrow, .farrow { transform: rotate(90deg); padding: 2px 0; }
+  nav.links { gap: 2px; }
+  nav.links a { padding: 6px 8px; font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand" onclick="go('home')">
+      <span class="brand-dot"></span>
+      <span class="brand-name">Security Translated</span>
+    </div>
+    <nav class="links" id="nav">
+      <a href="#home" data-page="home">Home</a>
+      <a href="#pillars" data-page="pillars">Pillars &amp; Domains</a>
+      <a href="#articles" data-page="articles">Articles</a>
+      <a href="#products" data-page="products">Products</a>
+      <a href="#freebies" data-page="freebies">Freebies</a>
+      <a href="#portfolio" data-page="portfolio">Portfolio</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════════ HOME ══════════ -->
+<main class="page" id="page-home">
+  <div class="wrap hero">
+    <div class="eyebrow">Translating cyber to the board · and back</div>
+    <h1>Cybersecurity for the people who build it<br><span class="gold">and the people who fund it.</span></h1>
+    <p class="tagline">We don't dumb things down. We translate them. Leadership gets business impact. Practitioners get real implementation. Both get respect.</p>
+
+    <div class="translate-demo" aria-label="Example translation from security jargon to board language">
+      <div class="t-before">
+        <div class="t-label">What security says</div>
+        <div class="t-fade" id="t-before-text">"We have critical CVEs in our external attack surface with no compensating controls."</div>
+      </div>
+      <div class="t-arrow">→</div>
+      <div class="t-after">
+        <div class="t-label">What the board hears</div>
+        <div class="t-fade" id="t-after-text">"Three internet-facing systems carry a roughly 15% annual chance of a $2M loss event. Fixing them costs $80K. Fund, accept, or transfer?"</div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn solid" href="https://securitytranslated.substack.com/subscribe" target="_blank" rel="noopener">Subscribe free</a>
+      <button class="btn" onclick="go('products')">See the products</button>
+      <button class="btn quiet" onclick="go('freebies')">Grab a freebie</button>
+    </div>
+
+    <div class="section-label">Start where you sit</div>
+    <div class="grid g3">
+      <a class="card" href="#products" onclick="go('products')">
+        <div class="num">EXECUTIVES &amp; BOARDS</div>
+        <h3>Risk in dollars, not acronyms</h3>
+        <p>Quantified risk stories, budget asks that get approved, and decks that survive the boardroom.</p>
+      </a>
+      <a class="card" href="#products" onclick="go('products')">
+        <div class="num">CISOs &amp; DIRECTORS</div>
+        <h3>Defensible up, implementable down</h3>
+        <p>Frameworks the board accepts and the team can actually run. The translation layer, packaged.</p>
+      </a>
+      <a class="card" href="#products" onclick="go('products')">
+        <div class="num">ENGINEERS &amp; BUILDERS</div>
+        <h3>It runs, or it doesn't ship</h3>
+        <p>Detection rules in Git, configs that paste clean, and the tradeoffs nobody prints on the box.</p>
+      </a>
+    </div>
+  </div>
+</main>
+
+<!-- ══════════ PILLARS & DOMAINS ══════════ -->
+<main class="page" id="page-pillars">
+  <div class="wrap">
+    <div class="eyebrow">The map</div>
+    <h1>Twelve pillars, <span class="gold">five personal domains.</span></h1>
+    <p class="tagline">The publication covers twelve technical and leadership pillars. The personal writing draws from five domains. Every post lives somewhere on this map.</p>
+
+    <div class="section-label">The 12 content pillars</div>
+    <div class="grid g3" id="pillar-grid"></div>
+
+    <div class="section-label">The 5 personal domains</div>
+    <p class="sub">Where the stories come from: building programs from nothing, the translation act itself, the human side of leading, compliance as trust, and a path that ran Air Force → teaching → IT → consultancy → MSSP leadership.</p>
+    <div class="grid g3" id="domain-grid"></div>
+  </div>
+</main>
+
+<!-- ══════════ ARTICLES ══════════ -->
+<main class="page" id="page-articles">
+  <div class="wrap">
+    <div class="eyebrow">The newsletter</div>
+    <h1>Latest from <span class="gold">Security Translated.</span></h1>
+    <p class="tagline">Pulled live from the Substack feed. Every issue serves both altitudes: leadership framing on top, implementation underneath.</p>
+
+    <div class="section-label">Recent issues</div>
+    <div class="article-list" id="feed"></div>
+
+    <div class="callout">
+      <div class="c-eyebrow">Never miss an issue</div>
+      <h3>One translation per week, free</h3>
+      <p>Subscribers get the templates and frameworks the day each issue ships. No filler, no vendor spin.</p>
+      <a class="btn" href="https://securitytranslated.substack.com/subscribe" target="_blank" rel="noopener">Subscribe free →</a>
+    </div>
+  </div>
+</main>
+
+<!-- ══════════ PRODUCTS / FUNNELS ══════════ -->
+<main class="page" id="page-products">
+  <div class="wrap">
+    <div class="eyebrow">The catalog</div>
+    <h1>Free finds the gap. <span class="gold">Paid closes it.</span></h1>
+    <p class="tagline">Every product line follows the same funnel: a free asset that finds your gaps, a weekly newsletter that keeps you sharp, and a paid playbook that closes them.</p>
+
+    <div class="section-label">Flagship funnels</div>
+    <p class="sub">Buy once, keep forever. Every purchase lives in your Lemon Squeezy library: lose the file, switch laptops, or want the updated edition, and you log back in and re-download. Updates to anything you've bought are free.</p>
+    <div id="funnels"></div>
+
+    <div class="section-label">The full catalog · all 12 pillars</div>
+    <p class="sub">Every pillar gets the same treatment: a free asset that finds the gap, and a paid product that closes it. Two are shipping now; the rest are in production, in this order of demand.</p>
+    <div class="cat-head"><div>Pillar</div><div>Free asset</div><div>Paid product</div></div>
+    <div id="catalog-pillars"></div>
+
+    <div class="section-label">The 5 personal domains</div>
+    <div class="cat-head"><div>Domain</div><div>Free asset</div><div>Paid product</div></div>
+    <div id="catalog-domains"></div>
+
+    <div class="callout">
+      <div class="c-eyebrow">Not sure where to start?</div>
+      <h3>Take the free asset first</h3>
+      <p>Both flagship products upgrade a free checklist or template. Run the free version. If it finds gaps, the paid version is how you close them. If it doesn't, you just saved money.</p>
+      <button class="btn" onclick="go('freebies')">Browse the freebies →</button>
+    </div>
+  </div>
+</main>
+
+<!-- ══════════ FREEBIES ══════════ -->
+<main class="page" id="page-freebies">
+  <div class="wrap">
+    <div class="eyebrow">Free downloads</div>
+    <h1>Free to share. <span class="gold">Built to use.</span></h1>
+    <p class="tagline">Every freebie is a complete, standalone asset. Subscribing (free) unlocks the download; that's the whole price. Free to share with attribution; not for resale.</p>
+
+    <div class="section-label">Lead magnets</div>
+    <div class="grid g2">
+      <a class="card" data-link="boardTemplate" target="_blank" rel="noopener">
+        <div class="num">BOARD · TEMPLATE</div>
+        <h3>The Board Briefing Template</h3>
+        <p>The 5-minute risk story structure as a fill-in template: one risk, one dollar range, one decision. Open and close on the decision; everything else supports it.</p>
+        <span class="pill free">Free with subscribe</span>
+      </a>
+      <a class="card" data-link="detectionChecklist" target="_blank" rel="noopener">
+        <div class="num">DETECTION · CHECKLIST</div>
+        <h3>The Detection Pipeline Checklist</h3>
+        <p>Audit your detection pipeline stage by stage: log source coverage, rule hygiene, testing, tuning. Every line item is verifiable, not vibes.</p>
+        <span class="pill free">Free with subscribe</span>
+      </a>
+      <a class="card" data-link="phraseSlice" target="_blank" rel="noopener">
+        <div class="num">BOARD · TRANSLATION TABLE</div>
+        <h3>Phrase translations, free slice</h3>
+        <p>Three of the twenty phrase rewrites from the Playbook: what you say, what the board hears, what to say instead.</p>
+        <span class="pill free">Free with subscribe</span>
+      </a>
+      <a class="card" href="https://securitytranslated.substack.com/subscribe" target="_blank" rel="noopener">
+        <div class="num">EVERY WEEK</div>
+        <h3>The newsletter itself</h3>
+        <p>The biggest freebie is the weekly issue: one topic, translated for both the boardroom and the terminal, with the working files attached.</p>
+        <span class="pill free">Subscribe free</span>
+      </a>
+    </div>
+
+    <div class="callout">
+      <div class="c-eyebrow">The honest pitch</div>
+      <h3>The free stuff finds problems. The paid stuff fixes them.</h3>
+      <p>If a free checklist tells you everything's fine, believe it and move on. If it doesn't, the matching playbook is the fastest path from gap to done.</p>
+      <button class="btn" onclick="go('products')">See the paid upgrades →</button>
+    </div>
+  </div>
+</main>
+
+<!-- ══════════ PORTFOLIO ══════════ -->
+<main class="page" id="page-portfolio">
+  <div class="wrap">
+    <div class="eyebrow">Ciber Cazadora · The person behind the newsletter</div>
+    <h1>I don't inherit security programs. <span class="gold">I build them.</span></h1>
+    <p class="tagline">Then I translate them so the people who fund security understand what they bought. Director of Information Security. USAF veteran. CISSP. Founder of Security Translated.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="n">0</div><div class="l">Major audit findings (SOC 2, HIPAA, NIST 800-171)</div></div>
+      <div class="stat"><div class="n">13+</div><div class="l">Years in IT &amp; security</div></div>
+      <div class="stat"><div class="n">300+</div><div class="l">Global clients trusting the program</div></div>
+      <div class="stat"><div class="n">253%</div><div class="l">Company growth while a 2-person team held the line</div></div>
+    </div>
+
+    <div class="section-label">The short version</div>
+    <p class="sub" style="max-width:700px">Six years active duty in the U.S. Air Force taught me that security is operational; there's no room for "good enough." Since then: built security programs from scratch more than once, taught ethical hacking and digital forensics at three universities for a decade, founded a consultancy in Hawai'i, and now run security end-to-end at an MSSP through 253% growth with a two-person team and no outside consultants. "Ciber Cazadora" means cyber huntress. I don't wait for threats to find me.</p>
+
+    <div class="section-label">Capabilities</div>
+    <div class="grid g2">
+      <div class="card"><h3>Identity &amp; Access Management</h3><div class="chips"><span class="chip">Entra ID</span><span class="chip">SAML / OIDC / SCIM</span><span class="chip">SSO &amp; MFA</span><span class="chip">PAM</span><span class="chip">RBAC &amp; JIT</span><span class="chip">Identity lifecycle</span></div></div>
+      <div class="card"><h3>Security Operations</h3><div class="chips"><span class="chip">Microsoft Sentinel</span><span class="chip">Defender XDR</span><span class="chip">KQL</span><span class="chip">Purview DLP</span><span class="chip">Incident response</span><span class="chip">Tenable VM</span></div></div>
+      <div class="card"><h3>Compliance &amp; Frameworks</h3><div class="chips"><span class="chip">SOC 2 Type 2</span><span class="chip">NIST 800-171</span><span class="chip">HIPAA</span><span class="chip">CMMC L2</span><span class="chip">GDPR / FERPA / COPPA</span><span class="chip">CIS Controls</span></div></div>
+      <div class="card"><h3>Cloud, Zero Trust &amp; Endpoints</h3><div class="chips"><span class="chip">Azure &amp; AWS</span><span class="chip">Intune / Jamf</span><span class="chip">Cloudflare</span><span class="chip">Tailscale ZTNA</span><span class="chip">Conditional access</span></div></div>
+      <div class="card"><h3>Offense &amp; Automation</h3><div class="chips"><span class="chip">Kali / Metasploit</span><span class="chip">Burp Suite</span><span class="chip">Nmap / Nessus</span><span class="chip">Python / Bash / PowerShell</span><span class="chip">CI/CD</span></div></div>
+      <div class="card"><h3>Certifications &amp; Education</h3><div class="chips"><span class="chip cert">CISSP</span><span class="chip cert">GCPN</span><span class="chip cert">GFACT</span><span class="chip cert">CHFI</span><span class="chip cert">CEH</span><span class="chip cert">Network+</span><span class="chip">MSc InfoSec &amp; Assurance</span><span class="chip">BSc Computer IT</span></div></div>
+    </div>
+
+    <div class="section-label">Proof of work, not slide decks</div>
+    <div class="grid g2">
+      <a class="card" href="https://github.com/cibercazadora/llm-security-lab" target="_blank" rel="noopener">
+        <div class="num">AI SECURITY</div>
+        <h3>Agentic LLM Threat Model &amp; Security Architecture</h3>
+        <p>23 attack vectors across 4 layers. Mitigations for all 10 OWASP LLM risks. MCP security layer with identity propagation, context isolation, and tiered sandboxing.</p>
+        <span class="pill paid">GitHub repo →</span>
+      </a>
+      <a class="card" href="https://github.com/cibercazadora/jml-identity-automation" target="_blank" rel="noopener">
+        <div class="num">IDENTITY ENGINEERING</div>
+        <h3>Identity Lifecycle &amp; Access Automation</h3>
+        <p>JML automation with Python and Microsoft Graph. Okta OIDC federation lab. Conditional access and device posture in Entra ID + Intune. Automated access reviews.</p>
+        <span class="pill paid">GitHub repo →</span>
+      </a>
+      <a class="card" href="https://github.com/cibercazadora/continuous-compliance-pipeline" target="_blank" rel="noopener">
+        <div class="num">COMPLIANCE AUTOMATION</div>
+        <h3>Continuous Compliance Pipeline</h3>
+        <p>Automated evidence collection from cloud, IdP, CI/CD, and runtime, mapped straight to control frameworks. No more screenshot-driven audits.</p>
+        <span class="pill soon">In progress</span>
+      </a>
+      <div class="card">
+        <div class="num">AI GOVERNANCE · ZERO TRUST</div>
+        <h3>NIST AI RMF + Tailscale ZTNA Labs</h3>
+        <p>Full AI RMF implementation with prompt injection defenses (canary tokens, instruction hierarchy, dual-LLM sanitization). Identity-based home network access: no VPNs, no exposed ports.</p>
+        <span class="pill soon">In progress</span>
+      </div>
+    </div>
+
+    <div class="section-label">Where I've been</div>
+    <div class="timeline">
+      <div class="t-item"><div class="t-when">2023 – Present</div><h3>Director of Information Security</h3><div class="t-org">Lumifi Cyber</div><p>Own the program end-to-end across hybrid AWS/Azure serving 300+ global clients. Built SOC 2 Type 2, HIPAA, and NIST 800-171 compliance from zero with zero major findings. Cut unnecessary privileged access by 96%. Two people, no consultants, 253% company growth.</p></div>
+      <div class="t-item"><div class="t-when">2023 – 2024</div><h3>Sr. IT Security Engineer</h3><div class="t-org">Lumifi Cyber</div><p>Promoted to Director within a year. Built the first vulnerability management program, authored 37 policies mapped to SOC 2/NIST/HIPAA, embedded SAST/DAST into CI/CD, and cut critical production vulnerabilities by 38%.</p></div>
+      <div class="t-item"><div class="t-when">2013 – 2023</div><h3>Cybersecurity Professor</h3><div class="t-org">Three universities, concurrent</div><p>Taught ethical hacking, digital forensics, Python, and CCNA for ten years. Built hands-on labs on AWS Workspaces and VMware. 2015 Instructor Excellence Award; led NSF grant-funded cyber cohorts.</p></div>
+      <div class="t-item"><div class="t-when">2018 – 2023</div><h3>Computer Systems Engineer</h3><div class="t-org">Education sector</div><p>Owned IT strategy and security for 750 users. Azure migration, 70% uptime improvement, malware incidents cut in half, compliance across HIPAA, PCI, GDPR, and COPPA.</p></div>
+      <div class="t-item"><div class="t-when">2019 – 2021</div><h3>Founding Owner</h3><div class="t-org">Lana'i Computer LLC</div><p>Built a consultancy from the ground up. Pen tests for healthcare, legal, and retail clients; HIPAA-compliant infrastructure for a nonprofit healthcare org. Clients across the Hawaiian Islands and nationwide.</p></div>
+      <div class="t-item"><div class="t-when">2000 – 2006</div><h3>Staff Sergeant (E-5)</h3><div class="t-org">U.S. Air Force, Active Duty</div><p>Six years with Secret clearance. Directed 30+ complex operations with zero safety failures. Two Air Force Achievement Medals, an Outstanding Unit Award, and a Humanitarian Service Medal.</p></div>
+    </div>
+
+    <div class="callout">
+      <div class="c-eyebrow">Let's build something</div>
+      <h3>I'd rather build with you than talk at you.</h3>
+      <p>Open to security leadership, CISO advisory, engineering consulting, mentoring, and speaking. Not open to unsolicited vendor pitches.</p>
+      <a class="btn" href="https://linktr.ee/priscilla.lopez" target="_blank" rel="noopener">Booking &amp; links</a>
+      <a class="btn quiet" href="https://linkedin.com/in/p-g-lopez" target="_blank" rel="noopener" style="margin-left:8px">LinkedIn</a>
+      <a class="btn quiet" href="https://cibercazadora.github.io/" target="_blank" rel="noopener" style="margin-left:8px">Full portfolio site</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span class="brand-name">Security Translated</span>
+    </div>
+    <div class="fine">Free to share with attribution. Not for resale. · <a href="https://securitytranslated.substack.com" target="_blank" rel="noopener">securitytranslated.substack.com</a></div>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   CONFIG — swap these once your real URLs exist. One place, done.
+   - STORE: your Lemon Squeezy storefront
+   - Checkout links: Lemon Squeezy → Products → Share → copy the
+     /checkout/buy/... URL, keep ?embed=1 for the overlay
+   - Freebie links: publish each freebie as a SUBSCRIBER-ONLY
+     Substack post with the PDF attached; paste the post URL here.
+     The subscribe wall IS the email gate.
+   ═══════════════════════════════════════════════════════════════ */
+const SUBSTACK = 'https://securitytranslated.substack.com';
+const STORE = 'https://securitytranslated.lemonsqueezy.com'; // ← your store
+const LINKS = {
+  // Paid checkouts (Lemon Squeezy)
+  playbook:  STORE + '/checkout/buy/REPLACE-PLAYBOOK-ID?embed=1',
+  detection: STORE + '/checkout/buy/REPLACE-DETECTION-ID?embed=1',
+  // Gated freebies (subscriber-only Substack posts)
+  boardTemplate:      SUBSTACK + '/p/board-briefing-template',
+  detectionChecklist: SUBSTACK + '/p/detection-pipeline-checklist',
+  phraseSlice:        SUBSTACK + '/p/phrase-translations-free-slice',
+};
+const resolve = l => LINKS[l] || l; // config key or raw URL
+
+const pillars = [
+  ['Translating Cyber to the Board', 'Risk quantification, board decks, business-language security narratives.'],
+  ['GRC', 'Functional programs, not checkbox theater.'],
+  ['GRC Engineering', 'Compliance as code, automated evidence, policy-as-code, GRC tech stacks.'],
+  ['AI Projects in Security', 'Building with AI, defending against AI, governing AI.'],
+  ['DevSecOps', 'Security in the dev lifecycle: gates, guardrails, champions, pipelines.'],
+  ['Container & Cloud-Native Security', 'Kubernetes, runtime, supply chain, eBPF, serverless.'],
+  ['Penetration Testing & Red Teaming', 'Offense that informs defense: scoping, reporting, purple teaming.'],
+  ['Code Review & Application Security', 'Threat modeling, secure review, auth flaws, API security.'],
+  ['Vulnerability Management', 'Prioritization, remediation, metrics, asset inventory, program building.'],
+  ['Security Architecture & Strategy', 'Zero trust, IAM, roadmaps, tool consolidation, technical debt.'],
+  ['Incident Response & Threat Detection', 'Detection engineering, IR plans, threat hunting, forensics.'],
+  ['Security Operations & Team Building', 'Hiring, burnout, budgeting, mentorship, cross-functional work.'],
+];
+
+const domains = [
+  ['Building Security Programs from Zero', 'Sequencing, tradeoffs, and the under-resourced reality. Feeds Steal My Homework.'],
+  ['Security Translated', 'The translation act itself: complex made clear without losing substance.'],
+  ['The Human Side of Security Leadership', 'Influence, politics, burnout, and pushing back without burning down.'],
+  ['Compliance as Trust, Not Theater', 'Compliance as the mechanism clients use to decide if you mean it.'],
+  ['The Nontraditional Path', 'Air Force to teaching to IT to consultancy to MSSP leadership. Never productized; this one\u2019s for connection.'],
+];
+
+const funnels = [
+  {
+    title: 'Translating Cyber to the Board',
+    tag: 'Pillar 1 · For CISOs, directors, and the executives who fund them',
+    free:  { name: 'Board Briefing Template', desc: 'The 5-minute risk story as a fill-in template. Free with subscribe.', link: 'boardTemplate' },
+    news:  'Weekly board-translation issues: phrasing, numbers, decision framing.',
+    paid:  { name: 'The Security Leader\u2019s Playbook', desc: '6 frameworks, 12 templates, 3 real board meetings dissected. Flagship, $49\u2013$99.', link: 'playbook', checkout: true },
+  },
+  {
+    title: 'Incident Response & Threat Detection',
+    tag: 'Pillar 11 · For detection engineers, SOC leads, and the CISOs who fund them',
+    free:  { name: 'Detection Pipeline Checklist', desc: 'Audit your pipeline in 30 minutes. Finds the gaps. Free with subscribe.', link: 'detectionChecklist' },
+    news:  'Detection engineering issues: rules, testing, tuning, coverage proof.',
+    paid:  { name: 'Detection-as-Code: The Detection Engineering Playbook', desc: '15 Sigma rules, CI pipeline, ATT&CK coverage map. Kit, $19\u2013$39.', link: 'detection', checkout: true },
+  },
+];
+
+/* ── Catalog: something for every pillar and domain ── */
+const ARCHIVE = SUBSTACK + '/archive';
+const catPillars = [
+  ['Translating Cyber to the Board', 'Risk stories, decks, budget language', { f: 'Board Briefing Template', fl: 'boardTemplate' }, { p: 'The Security Leader\u2019s Playbook', st: 'live', pl: 'playbook' }],
+  ['GRC', 'Programs, not checkbox theater', { f: 'Control by Control (series)', fl: ARCHIVE }, { p: 'GRC Program Kit', st: 'soon' }],
+  ['GRC Engineering', 'Compliance as code, automated evidence', { f: 'Continuous compliance pipeline write-ups', fl: ARCHIVE }, { p: 'Compliance-as-Code Playbook', st: 'soon' }],
+  ['AI Projects in Security', 'Building, defending, governing AI', { f: 'Agentic LLM threat model breakdowns', fl: ARCHIVE }, { p: 'AI Security Governance Kit', st: 'soon' }],
+  ['DevSecOps', 'Gates, guardrails, champions, pipelines', { f: 'Pipeline gate issues', fl: ARCHIVE }, { p: 'DevSecOps Playbook', st: 'soon' }],
+  ['Container & Cloud-Native Security', 'K8s, runtime, supply chain, eBPF', { f: 'Cloud-native issues', fl: ARCHIVE }, { p: 'Cloud-Native Security Kit', st: 'soon' }],
+  ['Penetration Testing & Red Teaming', 'Offense that informs defense', { f: 'Scoping & reporting issues', fl: ARCHIVE }, { p: 'Pentest Reporting Template Pack', st: 'soon' }],
+  ['Code Review & Application Security', 'Threat modeling, auth flaws, APIs', { f: 'Threat modeling issues', fl: ARCHIVE }, { p: 'Secure Code Review Checklist Pack', st: 'soon' }],
+  ['Vulnerability Management', 'Prioritization, remediation, metrics', { f: 'Prioritization issues', fl: ARCHIVE }, { p: 'VM Program-in-a-Box', st: 'soon' }],
+  ['Security Architecture & Strategy', 'Zero trust, IAM, roadmaps', { f: 'Roadmap & consolidation issues', fl: ARCHIVE }, { p: 'Security Roadmap Template Kit', st: 'soon' }],
+  ['Incident Response & Threat Detection', 'Detection engineering, IR, hunting', { f: 'Detection Pipeline Checklist', fl: 'detectionChecklist' }, { p: 'Detection-as-Code Playbook', st: 'live', pl: 'detection' }],
+  ['Security Operations & Team Building', 'Hiring, burnout, budgets, mentorship', { f: 'Career & team articles', fl: ARCHIVE }, { p: 'Hiring & Budget Template Pack', st: 'soon' }],
+];
+
+const catDomains = [
+  ['Building Security Programs from Zero', 'Sequencing, tradeoffs, lean reality', { f: 'Steal My Homework (series)', fl: ARCHIVE }, { p: 'Program-in-a-Box', st: 'soon' }],
+  ['Security Translated', 'The translation act itself', { f: 'Phrase translations, free slice', fl: 'phraseSlice' }, { p: 'The Security Leader\u2019s Playbook', st: 'live', pl: 'playbook' }],
+  ['The Human Side of Security Leadership', 'Influence, politics, pushing back', { f: 'Leadership articles, scripts included', fl: ARCHIVE }, { p: 'Stays free', st: 'free' }],
+  ['Compliance as Trust, Not Theater', 'Compliance clients believe', { f: 'Control by Control (series)', fl: ARCHIVE }, { p: 'GRC Program Kit', st: 'soon' }],
+  ['The Nontraditional Path', 'Air Force \u2192 teaching \u2192 IT \u2192 consultancy \u2192 MSSP', { f: 'The story, told straight', fl: ARCHIVE }, { p: 'Never productized, on purpose', st: 'free' }],
+];
+
+function catRow([name, sub, free, paid]) {
+  const fl = resolve(free.fl);
+  const paidBadge = paid.st === 'live' ? '<span class="mini-pill live">Available</span>'
+    : paid.st === 'free' ? '<span class="mini-pill freeform">Always free</span>'
+    : '<span class="mini-pill soon">In production</span>';
+  const paidLink = paid.pl ? ` <div><a href="${resolve(paid.pl)}" class="lemonsqueezy-button">Buy →</a></div>` : '';
+  return `<div class="cat-row">
+    <div class="c-name">${name}<small>${sub}</small></div>
+    <div class="cat-cell"><strong>${free.f}</strong><a href="${fl}" target="_blank" rel="noopener">Get it →</a></div>
+    <div class="cat-cell ${paid.st === 'live' ? 'gold' : ''}"><strong>${paid.p}</strong>${paidBadge}${paidLink}</div>
+  </div>`;
+}
+document.getElementById('catalog-pillars').innerHTML = catPillars.map(catRow).join('');
+document.getElementById('catalog-domains').innerHTML = catDomains.map(catRow).join('');
+
+/* ── Render pillars & domains ── */
+document.getElementById('pillar-grid').innerHTML = pillars.map((p, i) => `
+  <a class="card" href="${SUBSTACK}/archive" target="_blank" rel="noopener">
+    <div class="num">${String(i+1).padStart(2,'0')}</div>
+    <h3>${p[0]}</h3><p>${p[1]}</p>
+  </a>`).join('');
+
+document.getElementById('domain-grid').innerHTML = domains.map((d, i) => `
+  <a class="card domain" href="${SUBSTACK}/archive" target="_blank" rel="noopener">
+    <div class="num">D${i+1}</div>
+    <h3>${d[0]}</h3><p>${d[1]}</p>
+  </a>`).join('');
+
+/* ── Render funnels ── */
+document.getElementById('funnels').innerHTML = funnels.map(f => {
+  const paidLink = f.paid.link ? resolve(f.paid.link) : null;
+  const paidCta = !paidLink ? '' : f.paid.checkout
+    ? ` <div style="margin-top:6px"><a href="${paidLink}" class="lemonsqueezy-button">Buy now →</a></div>`
+    : ` <div style="margin-top:6px"><a href="${paidLink}" target="_blank" rel="noopener">See the product →</a></div>`;
+  return `
+  <div class="funnel">
+    <div class="pillar-tag">${f.tag}</div>
+    <h3>${f.title}</h3>
+    <div class="funnel-steps" style="margin-top:12px">
+      <div class="fstep free">
+        <div class="fs-label">Step 1 · Free asset</div>
+        <strong>${f.free.name}</strong>
+        ${f.free.desc}${f.free.link ? ` <div style="margin-top:6px"><a href="${resolve(f.free.link)}" target="_blank" rel="noopener">Get it →</a></div>` : ''}
+      </div>
+      <div class="farrow">→</div>
+      <div class="fstep news">
+        <div class="fs-label">Step 2 · Newsletter</div>
+        <strong>Weekly issues</strong>
+        ${f.news}
+      </div>
+      <div class="farrow">→</div>
+      <div class="fstep ${paidLink ? 'paid' : 'pending'}">
+        <div class="fs-label">Step 3 · ${paidLink ? 'Paid upgrade' : 'Coming'}</div>
+        <strong>${f.paid.name}</strong>
+        ${f.paid.desc}${paidCta}
+      </div>
+    </div>
+  </div>`;
+}).join('');
+
+/* ── Resolve freebie card links from CONFIG ── */
+document.querySelectorAll('[data-link]').forEach(a => { a.href = resolve(a.dataset.link); });
+
+/* ── Hero translation rotation ── */
+const translations = [
+  ['"We have critical CVEs in our external attack surface with no compensating controls."',
+   '"Three internet-facing systems carry a roughly 15% annual chance of a $2M loss event. Fixing them costs $80K. Fund, accept, or transfer?"'],
+  ['"Our MTTD is trending down but alert fatigue is impacting SOC throughput."',
+   '"We spot intrusions faster than last year, but the team is drowning in false alarms. One more analyst or better tooling fixes it; here\u2019s the cost of each."'],
+  ['"We lack EDR coverage on legacy endpoints outside the SCCM boundary."',
+   '"About 200 older machines are invisible to us. If ransomware lands there, we find out from the ransom note. Retiring them costs less than one bad week."'],
+];
+let ti = 0;
+const tb = document.getElementById('t-before-text');
+const ta = document.getElementById('t-after-text');
+setInterval(() => {
+  ti = (ti + 1) % translations.length;
+  tb.style.opacity = 0; ta.style.opacity = 0;
+  setTimeout(() => {
+    tb.textContent = translations[ti][0];
+    ta.textContent = translations[ti][1];
+    tb.style.opacity = 1; ta.style.opacity = 1;
+  }, 350);
+}, 7000);
+
+/* ── RSS feed ── */
+async function loadFeed() {
+  const el = document.getElementById('feed');
+  el.innerHTML = '<div class="feed-state">Loading the latest issues\u2026</div>';
+  const feedUrl = SUBSTACK + '/feed';
+  const proxies = [
+    'https://api.allorigins.win/raw?url=' + encodeURIComponent(feedUrl),
+    'https://corsproxy.io/?' + encodeURIComponent(feedUrl),
+  ];
+  for (const url of proxies) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) continue;
+      const xml = new DOMParser().parseFromString(await res.text(), 'text/xml');
+      const items = [...xml.querySelectorAll('item')].slice(0, 8);
+      if (!items.length) continue;
+      el.innerHTML = items.map(it => {
+        const title = it.querySelector('title')?.textContent ?? 'Untitled';
+        const link = it.querySelector('link')?.textContent ?? SUBSTACK;
+        const date = it.querySelector('pubDate')?.textContent;
+        const desc = (it.querySelector('description')?.textContent ?? '').replace(/<[^>]+>/g, '').slice(0, 160);
+        const d = date ? new Date(date).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+        return `<a class="article" href="${link}" target="_blank" rel="noopener">
+          <div class="a-date">${d}</div><h3>${title}</h3><p>${desc}${desc.length >= 160 ? '\u2026' : ''}</p>
+        </a>`;
+      }).join('');
+      return;
+    } catch (e) { /* try next proxy */ }
+  }
+  el.innerHTML = `<div class="feed-state">Couldn\u2019t reach the feed from this page (the browser blocked the cross-origin request). Read everything directly on <a href="${SUBSTACK}/archive" target="_blank" rel="noopener">the Substack archive →</a></div>`;
+}
+
+/* ── Router ── */
+const pages = ['home','pillars','articles','products','freebies','portfolio'];
+let feedLoaded = false;
+function go(page) {
+  if (!pages.includes(page)) page = 'home';
+  pages.forEach(p => document.getElementById('page-' + p).classList.toggle('visible', p === page));
+  document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('active', a.dataset.page === page));
+  history.replaceState(null, '', '#' + page);
+  window.scrollTo({ top: 0 });
+  if (page === 'articles' && !feedLoaded) { feedLoaded = true; loadFeed(); }
+}
+document.querySelectorAll('#nav a').forEach(a => a.addEventListener('click', e => { e.preventDefault(); go(a.dataset.page); }));
+window.addEventListener('hashchange', () => go(location.hash.slice(1)));
+go(location.hash.slice(1) || 'home');
+</script>
+</body>
+</html>

@@ -6,17 +6,6 @@
 <title>Security Translated — Cyber for the people who build it and the people who fund it</title>
 <script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
 <style>
-/*
-  SECURITY TRANSLATED — Site Stylesheet (Light Blue & Gold)
-  =========================================================
-  
-  
-
-  Same class names throughout, so no HTML changes are needed.
-  Includes the mobile nav fix (stacked + safe-area inset) and
-  the wider desktop gutters.
-*/
-
 /* ── Brand tokens: light blue & gold (matches the PDF/print system) ── */
 :root {
   --paper: #F7FAFD; --paper-card: #FFFFFF; --paper-alt: #EEF3FA;
@@ -103,6 +92,13 @@ a.card:hover { border-color: var(--gold); }
 .pill.free { background: var(--blue-grey); color: var(--blue); border: 1px solid var(--border-blue); }
 .pill.paid { background: var(--cream); color: var(--gold-deep); border: 1px solid var(--border-gold); }
 .pill.soon { background: var(--paper-alt); color: var(--muted); border: 1px solid var(--border); }
+
+
+/* ── Pillar / domain icons ── */
+.card-icon { width: 34px; height: 34px; margin-bottom: 11px; display: block; }
+.card-icon svg { width: 100%; height: 100%; }
+a.card:hover .card-icon svg g[stroke="#15233D"] { stroke: #33456B; }
+.card .num { margin-bottom: 6px; }
 
 /* ── Positioning block (shared with priscillalopez.com) ── */
 .pos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -206,7 +202,6 @@ footer .fine a { color: var(--gold-light); }
   .cat-head { display: none; }
   .cat-row { grid-template-columns: 1fr; gap: 9px; }
 }
- 
 </style>
 </head>
 <body>
@@ -231,18 +226,18 @@ footer .fine a { color: var(--gold-light); }
 <!-- ══════════ HOME ══════════ -->
 <main class="page" id="page-home">
   <div class="wrap hero">
-    <div class="eyebrow">Translating cyber to the board · and back</div>
-    <h1>Cybersecurity for the people who build it<br><span class="gold">and the people who fund it.</span></h1>
-    <p class="tagline">We don't dumb things down. We translate them. Leadership gets business impact. Practitioners get real implementation. Both get respect.</p>
+    <div class="eyebrow">Security Translated · written by Priscilla Lopez</div>
+    <h1>I build security programs from nothing.<br><span class="gold">Then I translate them for the people who pay for them.</span></h1>
+    <p class="tagline">Nine security domains, built from zero, through 174% company growth: SOC 2 Type II, HIPAA, NIST 800-171, zero major findings. This is where I write down how, for the people who fund security and the people who build it.</p>
 
-    <div class="translate-demo" aria-label="Example translation from security jargon to board language">
+    <div class="translate-demo" aria-label="Example translation from security jargon to executive language">
       <div class="t-before">
         <div class="t-label">What security says</div>
         <div class="t-fade" id="t-before-text">"We have critical CVEs in our external attack surface with no compensating controls."</div>
       </div>
       <div class="t-arrow">→</div>
       <div class="t-after">
-        <div class="t-label">What the board hears</div>
+        <div class="t-label">What the executive hears</div>
         <div class="t-fade" id="t-after-text">"Three internet-facing systems carry a roughly 15% annual chance of a $2M loss event. Fixing them costs $80K. Fund, accept, or transfer?"</div>
       </div>
     </div>
@@ -253,17 +248,20 @@ footer .fine a { color: var(--gold-light); }
       <button class="btn quiet" onclick="go('freebies')">Grab a freebie</button>
     </div>
 
+    <div class="section-label">Straight answers before you read further</div>
+    <div class="pos-grid" id="positioning"></div>
+
     <div class="section-label">Start where you sit</div>
     <div class="grid g3">
       <a class="card" href="#products" onclick="go('products')">
-        <div class="num">EXECUTIVES &amp; BOARDS</div>
+        <div class="num">EXECUTIVES WHO FUND SECURITY</div>
         <h3>Risk in dollars, not acronyms</h3>
-        <p>Quantified risk stories, budget asks that get approved, and decks that survive the boardroom.</p>
+        <p>Quantified risk stories, budget asks that get approved, and briefings that survive a skeptical CFO.</p>
       </a>
       <a class="card" href="#products" onclick="go('products')">
         <div class="num">CISOs &amp; DIRECTORS</div>
         <h3>Defensible up, implementable down</h3>
-        <p>Frameworks the board accepts and the team can actually run. The translation layer, packaged.</p>
+        <p>Frameworks leadership approves and the team can actually run. The translation layer, packaged.</p>
       </a>
       <a class="card" href="#products" onclick="go('products')">
         <div class="num">ENGINEERS &amp; BUILDERS</div>
@@ -347,9 +345,9 @@ footer .fine a { color: var(--gold-light); }
 
     <div class="section-label">Lead magnets</div>
     <div class="grid g2">
-      <a class="card" data-link="boardTemplate" target="_blank" rel="noopener">
-        <div class="num">BOARD · TEMPLATE</div>
-        <h3>The Board Briefing Template</h3>
+      <a class="card" data-link="execTemplate" target="_blank" rel="noopener">
+        <div class="num">EXECUTIVE · TEMPLATE</div>
+        <h3>The Executive Briefing Template</h3>
         <p>The 5-minute risk story structure as a fill-in template: one risk, one dollar range, one decision. Open and close on the decision; everything else supports it.</p>
         <span class="pill free">Free with subscribe</span>
       </a>
@@ -360,15 +358,15 @@ footer .fine a { color: var(--gold-light); }
         <span class="pill free">Free with subscribe</span>
       </a>
       <a class="card" data-link="phraseSlice" target="_blank" rel="noopener">
-        <div class="num">BOARD · TRANSLATION TABLE</div>
+        <div class="num">EXECUTIVE · TRANSLATION TABLE</div>
         <h3>Phrase translations, free slice</h3>
-        <p>Three of the twenty phrase rewrites from the Playbook: what you say, what the board hears, what to say instead.</p>
+        <p>Three of the twenty phrase rewrites from the Playbook: what you say, what leadership hears, what to say instead.</p>
         <span class="pill free">Free with subscribe</span>
       </a>
       <a class="card" href="https://securitytranslated.substack.com/subscribe" target="_blank" rel="noopener">
         <div class="num">EVERY WEEK</div>
         <h3>The newsletter itself</h3>
-        <p>The biggest freebie is the weekly issue: one topic, translated for both the boardroom and the terminal, with the working files attached.</p>
+        <p>The biggest freebie is the weekly issue: one topic, translated for both the executive floor and the terminal, with the working files attached.</p>
         <span class="pill free">Subscribe free</span>
       </a>
     </div>
@@ -385,19 +383,22 @@ footer .fine a { color: var(--gold-light); }
 <!-- ══════════ PORTFOLIO ══════════ -->
 <main class="page" id="page-portfolio">
   <div class="wrap">
-    <div class="eyebrow">Ciber Cazadora · The person behind the newsletter</div>
+    <div class="eyebrow">Ciber Cazadora · Priscilla Lopez</div>
     <h1>I don't inherit security programs. <span class="gold">I build them.</span></h1>
-    <p class="tagline">Then I translate them so the people who fund security understand what they bought. Director of Information Security. USAF veteran. CISSP. Founder of Security Translated.</p>
+    <p class="tagline">Nine domains, from zero, with a lean team. Then translated for the people who pay for it. Director of Information Security at an MDR provider. USAF veteran. CISSP and GCPN.</p>
+
+    <div class="section-label">Straight answers</div>
+    <div class="pos-grid" id="positioning-portfolio"></div>
 
     <div class="stats">
-      <div class="stat"><div class="n">0</div><div class="l">Major audit findings (SOC 2, HIPAA, NIST 800-171)</div></div>
-      <div class="stat"><div class="n">13+</div><div class="l">Years in IT &amp; security</div></div>
-      <div class="stat"><div class="n">300+</div><div class="l">Global clients trusting the program</div></div>
-      <div class="stat"><div class="n">253%</div><div class="l">Company growth while a 2-person team held the line</div></div>
+      <div class="stat"><div class="n">0</div><div class="l">Major findings across SOC 2 Type II, HIPAA, NIST 800-171</div></div>
+      <div class="stat"><div class="n">9</div><div class="l">Security domains built from zero</div></div>
+      <div class="stat"><div class="n">95%</div><div class="l">CMMC Level 2 alignment on first assessment</div></div>
+      <div class="stat"><div class="n">6 yrs</div><div class="l">USAF, Secret clearance, zero safety or compliance failures</div></div>
     </div>
 
     <div class="section-label">The short version</div>
-    <p class="sub" style="max-width:700px">Six years active duty in the U.S. Air Force taught me that security is operational; there's no room for "good enough." Since then: built security programs from scratch more than once, taught ethical hacking and digital forensics at three universities for a decade, founded a consultancy in Hawai'i, and now run security end-to-end at an MSSP through 253% growth with a two-person team and no outside consultants. "Ciber Cazadora" means cyber huntress. I don't wait for threats to find me.</p>
+    <p class="sub" style="max-width:700px">It started with a Commodore 64. I didn't play games on it. I took it apart, figured out how it worked, and put it back together. That instinct never left. Six years in the Air Force taught me to lead when the situation is unclear. A decade teaching cybersecurity at three universities taught me to make risk make sense for any audience. Running my own consultancy in Hawai'i taught me that every engagement is personal when your name is on the door. Today I run security end-to-end at an MDR provider: nine domains, built from zero, with a lean team through 174% growth. Built right. Passed clean. People first.</p>
 
     <div class="section-label">Capabilities</div>
     <div class="grid g2">
@@ -438,22 +439,59 @@ footer .fine a { color: var(--gold-light); }
     </div>
 
     <div class="section-label">Where I've been</div>
+    <p class="sub">Selected roles: the military years and the last decade. Earlier work was in other fields.</p>
     <div class="timeline">
-      <div class="t-item"><div class="t-when">2023 – Present</div><h3>Director of Information Security</h3><div class="t-org">Lumifi Cyber</div><p>Own the program end-to-end across hybrid AWS/Azure serving 300+ global clients. Built SOC 2 Type 2, HIPAA, and NIST 800-171 compliance from zero with zero major findings. Cut unnecessary privileged access by 96%. Two people, no consultants, 253% company growth.</p></div>
-      <div class="t-item"><div class="t-when">2023 – 2024</div><h3>Sr. IT Security Engineer</h3><div class="t-org">Lumifi Cyber</div><p>Promoted to Director within a year. Built the first vulnerability management program, authored 37 policies mapped to SOC 2/NIST/HIPAA, embedded SAST/DAST into CI/CD, and cut critical production vulnerabilities by 38%.</p></div>
-      <div class="t-item"><div class="t-when">2013 – 2023</div><h3>Cybersecurity Professor</h3><div class="t-org">Three universities, concurrent</div><p>Taught ethical hacking, digital forensics, Python, and CCNA for ten years. Built hands-on labs on AWS Workspaces and VMware. 2015 Instructor Excellence Award; led NSF grant-funded cyber cohorts.</p></div>
-      <div class="t-item"><div class="t-when">2018 – 2023</div><h3>Computer Systems Engineer</h3><div class="t-org">Education sector</div><p>Owned IT strategy and security for 750 users. Azure migration, 70% uptime improvement, malware incidents cut in half, compliance across HIPAA, PCI, GDPR, and COPPA.</p></div>
-      <div class="t-item"><div class="t-when">2019 – 2021</div><h3>Founding Owner</h3><div class="t-org">Lana'i Computer LLC</div><p>Built a consultancy from the ground up. Pen tests for healthcare, legal, and retail clients; HIPAA-compliant infrastructure for a nonprofit healthcare org. Clients across the Hawaiian Islands and nationwide.</p></div>
-      <div class="t-item"><div class="t-when">2000 – 2006</div><h3>Staff Sergeant (E-5)</h3><div class="t-org">U.S. Air Force, Active Duty</div><p>Six years with Secret clearance. Directed 30+ complex operations with zero safety failures. Two Air Force Achievement Medals, an Outstanding Unit Award, and a Humanitarian Service Medal.</p></div>
+      <div class="t-item"><div class="t-when">April 2024 – Present</div><h3>Director of Information Security</h3><div class="t-org">Lumifi Cyber · Scottsdale, AZ</div><p>Built the security program from zero across nine domains: GRC, vulnerability management, IAM, endpoint, product security, infrastructure, third-party risk, incident response, and disaster recovery. SOC 2 Type II, HIPAA, and NIST 800-171 with zero major findings. CMMC Level 2 to 95% alignment on first assessment. Led a lean team through 174% company growth, developing a junior hire. Audit pass rate went 82% to 100%. Eliminated 96% of standing privileged access. Zero data breaches in three years.</p></div>
+      <div class="t-item"><div class="t-when">April 2023 – April 2024</div><h3>Senior IT Security Engineer</h3><div class="t-org">Lumifi Cyber</div><p>Walked into a program that existed on paper. Rebuilt vulnerability management, risk operations, and compliance readiness into workflows that survived the first SOC 2 Type II and NIST 800-171 audits with zero major findings. Authored 37 framework-mapped policies. Embedded SAST/DAST into CI/CD and cut critical production vulnerabilities 38%. Promoted to Director in under a year, skipping Manager.</p></div>
+      <div class="t-item"><div class="t-when">2013 – 2023, concurrent</div><h3>Adjunct Professor &amp; Lecturer</h3><div class="t-org">UH Maui College · Liberty University · Excelsior College</div><p>Taught ethical hacking, digital forensics, Python, and networking across three universities for ten concurrent years, alongside full-time work. Built hands-on labs with AWS Workspaces, VMware, and SEED Labs. 2015 Instructor Excellence Award at Liberty; led NSF grant-funded cohorts at the University of Hawai'i. This decade is why I explain risk differently than most leaders in this field.</p></div>
+      <div class="t-item"><div class="t-when">2018 – 2023</div><h3>Computer Systems Engineer</h3><div class="t-org">Hawaii Preparatory Academy</div><p>Sole IT owner for a K-12 campus of 600 students and 150 staff. Completed a school-wide LMS and SIS rollout in half the industry timeline, led GDPR readiness for an international parent community, cut malware incidents in half, and secured roughly $50K in infrastructure grant funding. Compliance across PCI, GDPR, COPPA, CIPA, and HIPAA.</p></div>
+      <div class="t-item"><div class="t-when">2013 – 2018</div><h3>Founding Owner &amp; Lead Technologist</h3><div class="t-org">Lana'i Computers LLC</div><p>Founded and ran a solo IT and security consultancy for five years. Delivered seven external and web application penetration tests for healthcare, legal, and retail clients. Designed a HIPAA-compliant environment for a nonprofit healthcare org. Scoping, delivery, reporting, and the business itself: all of it mine.</p></div>
+      <div class="t-item"><div class="t-when">2000 – 2006</div><h3>Staff Sergeant (E-5), Munitions Systems Specialist</h3><div class="t-org">U.S. Air Force, Active Duty</div><p>Six years active duty with a Secret clearance. Directed 30+ munitions operations involving missile systems valued at $100K+, with zero safety or compliance failures. Earned audit commendations for documentation accuracy. Two Air Force Achievement Medals, an Outstanding Unit Award, and a Humanitarian Service Medal. The accountability standard here is the one I still run security programs by.</div>
+    </div>
+
+    <div class="section-label">Speaking &amp; publications</div>
+    <p class="sub">Publishing security writing since 2013. The newsletter is the current form, not the start.</p>
+    <div class="grid g2">
+      <a class="card" href="https://securitytranslated.substack.com" target="_blank" rel="noopener">
+        <div class="num">ONGOING · NEWSLETTER</div>
+        <h3>Security Translated</h3>
+        <p>Weekly translation between the executive floor and the terminal. Frameworks up top, implementation underneath.</p>
+      </a>
+      <a class="card" href="https://youtu.be/qXWcfOwLaio" target="_blank" rel="noopener">
+        <div class="num">2025 · INTERVIEW</div>
+        <h3>A Day in the Life: Cybersecurity</h3>
+        <p>CyberJitsu. What the work actually looks like, minus the keynote gloss.</p>
+      </a>
+      <div class="card">
+        <div class="num">2024 &amp; 2025 · SPEAKING</div>
+        <h3>MSP / Customer Security Summit</h3>
+        <p>Compliance panel in 2024, CMMC compliance talk in 2025. Two years running.</p>
+      </div>
+      <div class="card">
+        <div class="num">2025 · PRESENTATION</div>
+        <h3>Enterprise Cyber Resilience Strategy</h3>
+        <p>Presented to a peer cohort of security leaders, (ISC)&sup2; Cyber Leadership Program.</p>
+      </div>
+      <a class="card" href="https://www.lumificyber.com/knowledge-center/webinars/incident-response-plan/" target="_blank" rel="noopener">
+        <div class="num">2023 · WEBINAR</div>
+        <h3>Creating an Effective Incident Response Plan</h3>
+        <p>Lumifi Knowledge Center. The plan people actually run, not the one that sits in a binder.</p>
+      </a>
+      <a class="card" href="https://eforensicsmag.com/download/learn-how-to-101-best-forensic-tutorials/" target="_blank" rel="noopener">
+        <div class="num">2013 · PUBLISHED</div>
+        <h3>Two features in eForensics Magazine</h3>
+        <p>"Steganography: Hidden Data in Plain Sight" and "12 Open-Source Linux Forensic Tools." Thirteen years of writing this stuff down.</p>
+      </a>
     </div>
 
     <div class="callout">
       <div class="c-eyebrow">Let's build something</div>
       <h3>I'd rather build with you than talk at you.</h3>
-      <p>Open to security leadership, CISO advisory, engineering consulting, mentoring, and speaking. Not open to unsolicited vendor pitches.</p>
-      <a class="btn" href="https://linktr.ee/priscilla.lopez" target="_blank" rel="noopener">Booking &amp; links</a>
+      <p>Phoenix, Arizona. Open to security leadership, CISO advisory, and speaking. Not open to unsolicited vendor pitches.</p>
+      <a class="btn" href="mailto:plopez@priscillalopez.com">plopez@priscillalopez.com</a>
+      <a class="btn quiet" href="https://linktr.ee/priscilla.lopez" target="_blank" rel="noopener" style="margin-left:8px">Booking &amp; links</a>
       <a class="btn quiet" href="https://linkedin.com/in/p-g-lopez" target="_blank" rel="noopener" style="margin-left:8px">LinkedIn</a>
-      <a class="btn quiet" href="https://cibercazadora.github.io/" target="_blank" rel="noopener" style="margin-left:8px">Full portfolio site</a>
+      <a class="btn quiet" href="https://priscillalopez.com" target="_blank" rel="noopener" style="margin-left:8px">priscillalopez.com</a>
     </div>
   </div>
 </main>
@@ -485,14 +523,92 @@ const LINKS = {
   playbook:  STORE + '/checkout/buy/REPLACE-PLAYBOOK-ID?embed=1',
   detection: STORE + '/checkout/buy/REPLACE-DETECTION-ID?embed=1',
   // Gated freebies (subscriber-only Substack posts)
-  boardTemplate:      SUBSTACK + '/p/board-briefing-template',
+  execTemplate:       SUBSTACK + '/p/executive-briefing-template',
   detectionChecklist: SUBSTACK + '/p/detection-pipeline-checklist',
   phraseSlice:        SUBSTACK + '/p/phrase-translations-free-slice',
 };
 const resolve = l => LINKS[l] || l; // config key or raw URL
 
+/* Security Translated — pillar & domain icon set.
+   32x32 viewBox, navy stroke #15233D, one gold #B8860B accent each. */
+const ICON_OPEN = '<svg viewBox="0 0 32 32" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+const N = s => `<g stroke="#15233D">${s}</g>`;
+const G = s => `<g stroke="#B8860B">${s}</g>`;
+
+const PILLAR_ICONS = [
+  /* 1 Executive translation: chart panel, gold arrow out */
+  N('<rect x="3" y="7" width="16" height="16" rx="2"/><path d="M7 19v-3.5M11 19v-7.5M15 19v-5"/>') +
+  G('<path d="M22 15h6M25.5 12l3 3-3 3"/>'),
+
+  /* 2 GRC: clipboard, gold check */
+  N('<rect x="7" y="6" width="18" height="23" rx="2"/><path d="M12 6V4h8v2"/><path d="M12 13h8M12 18h8"/>') +
+  G('<path d="M12 23.5l2.5 2.5L20 20.5"/>'),
+
+  /* 3 GRC Engineering: code brackets, gold automation gear */
+  N('<path d="M10 9 3 16l7 7M22 9l7 7-7 7"/>') +
+  G('<circle cx="16" cy="16" r="3"/><path d="M16 10.5v2M16 19.5v2M10.5 16h2M19.5 16h2"/>'),
+
+  /* 4 AI Security: chip, gold core */
+  N('<rect x="9" y="9" width="14" height="14" rx="2"/><path d="M13 5v4M19 5v4M13 23v4M19 23v4M5 13h4M5 19h4M23 13h4M23 19h4"/>') +
+  G('<rect x="13" y="13" width="6" height="6" rx="1"/>'),
+
+  /* 5 DevSecOps: two loops, gold shield at the seam */
+  N('<circle cx="10.5" cy="16" r="5.5"/><circle cx="21.5" cy="16" r="5.5"/>') +
+  G('<path d="M16 10.5l4 1.5v3.5c0 2.6-1.7 4.2-4 5.2-2.3-1-4-2.6-4-5.2V12z"/>'),
+
+  /* 6 Container & cloud-native: cube, gold cloud */
+  N('<path d="M16 11.5l8 4.5v9l-8 4.5-8-4.5v-9z"/><path d="M8 16l8 4.5 8-4.5M16 20.5V29"/>') +
+  G('<path d="M9 8a3.6 3.6 0 0 1 6.9-1.2A3.1 3.1 0 0 1 21.5 8"/>'),
+
+  /* 7 Pentest & red team: crosshair, gold center */
+  N('<circle cx="16" cy="16" r="9"/><circle cx="16" cy="16" r="4.5"/><path d="M16 3v4M16 25v4M3 16h4M25 16h4"/>') +
+  G('<circle cx="16" cy="16" r="1.5" fill="#B8860B" stroke="none"/>'),
+
+  /* 8 Code review & AppSec: brackets, gold magnifier */
+  N('<path d="M11 8 4 16l7 8M21 8l7 8-7 8"/>') +
+  G('<circle cx="16" cy="15" r="4"/><path d="M19 18l2.5 2.5"/>'),
+
+  /* 9 Vulnerability management: ranked rows, gold top priority */
+  N('<path d="M5 9h13M5 15h10M5 21h7M5 27h4"/>') +
+  G('<circle cx="24" cy="9" r="3"/>'),
+
+  /* 10 Architecture & strategy: zero-trust rings, gold core */
+  N('<circle cx="16" cy="16" r="12"/><circle cx="16" cy="16" r="7.5"/>') +
+  G('<circle cx="16" cy="16" r="3"/>'),
+
+  /* 11 IR & detection: pulse, gold blip */
+  N('<path d="M3 18h6l3.5-9 4.5 15 3-6h9"/>') +
+  G('<circle cx="12.5" cy="9" r="2.4"/>'),
+
+  /* 12 SecOps & team: three nodes, gold hub */
+  N('<circle cx="16" cy="6.5" r="3.5"/><circle cx="6.5" cy="24" r="3.5"/><circle cx="25.5" cy="24" r="3.5"/><path d="M14 9.5 9 20.5M18 9.5l5 11M10 24h12"/>') +
+  G('<circle cx="16" cy="17" r="2.4"/>'),
+];
+
+const DOMAIN_ICONS = [
+  /* D1 Building from zero: rising blocks, gold last */
+  N('<rect x="3" y="21" width="8" height="8" rx="1"/><rect x="12" y="14" width="8" height="15" rx="1"/>') +
+  G('<rect x="21" y="6" width="8" height="23" rx="1"/>'),
+
+  /* D2 Security Translated: two bubbles, one navy one gold */
+  N('<rect x="3" y="6" width="14" height="11" rx="2"/><path d="M7.5 17v3.5l3.5-3.5"/>') +
+  G('<rect x="15" y="15" width="14" height="11" rx="2"/><path d="M24.5 26v3.5L21 26"/>'),
+
+  /* D3 Human side of leadership: person, gold pulse */
+  N('<circle cx="16" cy="8.5" r="4.5"/><path d="M6 28c0-5.2 4.5-8.5 10-8.5s10 3.3 10 8.5"/>') +
+  G('<path d="M10 24h2.5l1.5-3 2 5.5 1.5-2.5H22"/>'),
+
+  /* D4 Compliance as trust: shield, gold check */
+  N('<path d="M16 3.5l11 4v8.5c0 7.2-4.6 10.8-11 12.8-6.4-2-11-5.6-11-12.8V7.5z"/>') +
+  G('<path d="M11 16.5l3.5 3.5L21.5 13"/>'),
+
+  /* D5 Nontraditional path: dashed route, gold destination */
+  N('<path d="M4 27c5 0 5.5-5 10-6.5S22 16 24 11" stroke-dasharray="2.5 3.5"/><circle cx="4" cy="27" r="2"/><circle cx="14" cy="20.5" r="2"/>') +
+  G('<circle cx="25.5" cy="7" r="3.5"/>'),
+];
+
 const pillars = [
-  ['Translating Cyber to the Board', 'Risk quantification, board decks, business-language security narratives.'],
+  ['Translating Cyber to the Executive', 'Risk quantification, executive briefings, business-language security narratives.'],
   ['GRC', 'Functional programs, not checkbox theater.'],
   ['GRC Engineering', 'Compliance as code, automated evidence, policy-as-code, GRC tech stacks.'],
   ['AI Projects in Security', 'Building with AI, defending against AI, governing AI.'],
@@ -516,11 +632,11 @@ const domains = [
 
 const funnels = [
   {
-    title: 'Translating Cyber to the Board',
+    title: 'Translating Cyber to the Executive',
     tag: 'Pillar 1 · For CISOs, directors, and the executives who fund them',
-    free:  { name: 'Board Briefing Template', desc: 'The 5-minute risk story as a fill-in template. Free with subscribe.', link: 'boardTemplate' },
-    news:  'Weekly board-translation issues: phrasing, numbers, decision framing.',
-    paid:  { name: 'The Security Leader\u2019s Playbook', desc: '6 frameworks, 12 templates, 3 real board meetings dissected. Flagship, $49\u2013$99.', link: 'playbook', checkout: true },
+    free:  { name: 'Executive Briefing Template', desc: 'The 5-minute risk story as a fill-in template. Free with subscribe.', link: 'execTemplate' },
+    news:  'Weekly executive-translation issues: phrasing, numbers, decision framing.',
+    paid:  { name: 'The Security Leader\u2019s Playbook', desc: '6 frameworks, 12 templates, 3 real executive briefings dissected. Flagship, $49\u2013$99.', link: 'playbook', checkout: true },
   },
   {
     title: 'Incident Response & Threat Detection',
@@ -534,7 +650,7 @@ const funnels = [
 /* ── Catalog: something for every pillar and domain ── */
 const ARCHIVE = SUBSTACK + '/archive';
 const catPillars = [
-  ['Translating Cyber to the Board', 'Risk stories, decks, budget language', { f: 'Board Briefing Template', fl: 'boardTemplate' }, { p: 'The Security Leader\u2019s Playbook', st: 'live', pl: 'playbook' }],
+  ['Translating Cyber to the Executive', 'Risk stories, briefings, budget language', { f: 'Executive Briefing Template', fl: 'execTemplate' }, { p: 'The Security Leader\u2019s Playbook', st: 'live', pl: 'playbook' }],
   ['GRC', 'Programs, not checkbox theater', { f: 'Control by Control (series)', fl: ARCHIVE }, { p: 'GRC Program Kit', st: 'soon' }],
   ['GRC Engineering', 'Compliance as code, automated evidence', { f: 'Continuous compliance pipeline write-ups', fl: ARCHIVE }, { p: 'Compliance-as-Code Playbook', st: 'soon' }],
   ['AI Projects in Security', 'Building, defending, governing AI', { f: 'Agentic LLM threat model breakdowns', fl: ARCHIVE }, { p: 'AI Security Governance Kit', st: 'soon' }],
@@ -574,12 +690,14 @@ document.getElementById('catalog-domains').innerHTML = catDomains.map(catRow).jo
 /* ── Render pillars & domains ── */
 document.getElementById('pillar-grid').innerHTML = pillars.map((p, i) => `
   <a class="card" href="${SUBSTACK}/archive" target="_blank" rel="noopener">
+    <span class="card-icon">${ICON_OPEN}${PILLAR_ICONS[i]}</svg></span>
     <div class="num">${String(i+1).padStart(2,'0')}</div>
     <h3>${p[0]}</h3><p>${p[1]}</p>
   </a>`).join('');
 
 document.getElementById('domain-grid').innerHTML = domains.map((d, i) => `
   <a class="card domain" href="${SUBSTACK}/archive" target="_blank" rel="noopener">
+    <span class="card-icon">${ICON_OPEN}${DOMAIN_ICONS[i]}</svg></span>
     <div class="num">D${i+1}</div>
     <h3>${d[0]}</h3><p>${d[1]}</p>
   </a>`).join('');
@@ -615,6 +733,21 @@ document.getElementById('funnels').innerHTML = funnels.map(f => {
     </div>
   </div>`;
 }).join('');
+
+/* ══ SHARED POSITIONING ══
+   Paste this same wording on priscillalopez.com so both sites say
+   the same thing. One story, two front doors. ══ */
+const positioning = [
+  ['Who I am', 'gold', 'A security leader who builds programs from zero and won\u2019t build them any way but right. Nearly two decades across the Air Force, three university classrooms, my own consultancy, and now an MDR provider. <strong>Budget conversations and bash terminals, same day.</strong>'],
+  ['Who I\u2019m not', 'not', 'Not a vendor. Not a consultant selling you a maturity model you\u2019ll never staff. Not a GRC director who can\u2019t open a terminal, and not a pentester who can\u2019t write an executive summary. <strong>I don\u2019t do security theater, and I won\u2019t sell you shelfware.</strong>'],
+  ['What I bring', 'gold', '<strong>Nine security domains built from zero.</strong> SOC 2 Type II, HIPAA, and NIST 800-171 with zero major findings; CMMC Level 2 to 95% on first assessment. A lean team through 174% growth with minimal consultant support. Audit pass rate 82% to 100%. 96% of standing privileged access eliminated. 37 policies written, not inherited.'],
+  ['Why that\u2019s different', 'not', 'Most security leaders inherit a program and patch it. I\u2019ve built from zero as the only security person in the room, with no senior to escalate to. Then I taught it for a decade, which is why <strong>I can explain it to an executive, an engineer, and an auditor in the same afternoon.</strong>'],
+];
+const posHTML = positioning.map(([h, kind, body]) =>
+  `<div class="pos ${kind === 'not' ? 'not' : ''}"><h3>${h}</h3><p>${body}</p></div>`).join('');
+['positioning','positioning-portfolio'].forEach(id => {
+  const el = document.getElementById(id); if (el) el.innerHTML = posHTML;
+});
 
 /* ── Resolve freebie card links from CONFIG ── */
 document.querySelectorAll('[data-link]').forEach(a => { a.href = resolve(a.dataset.link); });

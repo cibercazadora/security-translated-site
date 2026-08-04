@@ -315,7 +315,7 @@ footer .fine a { color: var(--gold-light); }
     <p class="tagline">Every product line follows the same funnel: a free asset that finds your gaps, a weekly newsletter that keeps you sharp, and a paid playbook that closes them.</p>
 
     <div class="section-label">Flagship funnels</div>
-    <p class="sub">Buy once, keep forever. Every purchase lives in your Lemon Squeezy library: lose the file, switch laptops, or want the updated edition, and you log back in and re-download. Updates to anything you've bought are free.</p>
+    <p class="sub">Buy once, keep forever. Every purchase lives in your Payhip library: lose the file, switch laptops, or want the updated edition, and you log back in and re-download. Updates to anything you've bought are free.</p>
     <div id="funnels"></div>
 
     <div class="section-label">The full catalog · all 12 pillars</div>
@@ -357,16 +357,11 @@ footer .fine a { color: var(--gold-light); }
         <p>Audit your detection pipeline stage by stage: log source coverage, rule hygiene, testing, tuning. Every line item is verifiable, not vibes.</p>
         <span class="pill free">Free with subscribe</span>
       </a>
-      <a class="card" data-link="phraseSlice" target="_blank" rel="noopener">
-        <div class="num">EXECUTIVE · TRANSLATION TABLE</div>
-        <h3>Phrase translations, free slice</h3>
-        <p>Three of the twenty phrase rewrites from the Playbook: what you say, what leadership hears, what to say instead.</p>
-        <span class="pill free">Free with subscribe</span>
-      </a>
+  
       <a class="card" href="https://securitytranslated.substack.com/subscribe" target="_blank" rel="noopener">
         <div class="num">EVERY WEEK</div>
         <h3>The newsletter itself</h3>
-        <p>The biggest freebie is the weekly issue: one topic, translated for both the executive floor and the terminal, with the working files attached.</p>
+        <p>The biggest freebie is the weekly issue: one topic, translated for both the executive floor and the terminal.</p>
         <span class="pill free">Subscribe free</span>
       </a>
     </div>
@@ -385,7 +380,7 @@ footer .fine a { color: var(--gold-light); }
   <div class="wrap">
     <div class="eyebrow">Who writes this</div>
     <h1>Priscilla Lopez. <span class="gold">Ciber Cazadora.</span></h1>
-    <p class="tagline">Director of Information Security. I build security programs from zero that pass audits and earn trust. Nine domains, SOC 2 Type II, HIPAA, NIST 800-171, zero major findings. CISSP and GCPN. USAF veteran. Phoenix, Arizona.</p>
+    <p class="tagline">Director of Information Security. I build security programs from zero that pass audits and earn trust. Nine domains, SOC 2 Type II, HIPAA, NIST 800-171, zero major findings. CISSP, GCPN, CEH, CHFI, Network+. USAF veteran. Phoenix, Arizona.</p>
 
     <div class="section-label">Straight answers</div>
     <div class="pos-grid" id="positioning-portfolio"></div>
@@ -394,7 +389,7 @@ footer .fine a { color: var(--gold-light); }
       <div class="stat"><div class="n">0</div><div class="l">Major findings across SOC 2 Type II, HIPAA, NIST 800-171</div></div>
       <div class="stat"><div class="n">9</div><div class="l">Security domains built from zero</div></div>
       <div class="stat"><div class="n">95%</div><div class="l">CMMC Level 2 alignment on first assessment</div></div>
-      <div class="stat"><div class="n">6 yrs</div><div class="l">USAF, Secret clearance, zero safety or compliance failures</div></div>
+      <div class="stat"><div class="n">6 yrs</div><div class="l">USAF, Secret clearance (Inactive), zero safety or compliance failures</div></div>
     </div>
 
     <div class="callout">
@@ -429,15 +424,16 @@ footer .fine a { color: var(--gold-light); }
      The subscribe wall IS the email gate.
    ═══════════════════════════════════════════════════════════════ */
 const SUBSTACK = 'https://securitytranslated.substack.com';
-const STORE = 'https://securitytranslated.lemonsqueezy.com'; // ← your store
+const STORE = 'https://payhip.com/SecurityTranslated'; // ← your store
 const LINKS = {
-  // Paid checkouts (Lemon Squeezy)
-  playbook:  STORE + '/checkout/buy/REPLACE-PLAYBOOK-ID?embed=1',
-  detection: STORE + '/checkout/buy/REPLACE-DETECTION-ID?embed=1',
+  // Paid checkouts (Payhil)
+//  playbook:  STORE + 'https://payhip.com/b/ADtxl',
+//  detection: STORE + '/checkout/buy/REPLACE-DETECTION-ID?embed=1',
   // Gated freebies (subscriber-only Substack posts)
-  execTemplate:       SUBSTACK + '/p/executive-briefing-template',
-  detectionChecklist: SUBSTACK + '/p/detection-pipeline-checklist',
-  phraseSlice:        SUBSTACK + '/p/phrase-translations-free-slice',
+  execTemplate:       STORE + '/b/ADtxl',
+  detectionChecklist: STORE + '/b/WeZov',
+  budgetPitch:        STORE + '/b/FS6eg',
+  riskQuantification: Store + '/b/J5xW6'
 };
 const resolve = l => LINKS[l] || l; // config key or raw URL
 
